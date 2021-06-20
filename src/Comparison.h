@@ -29,7 +29,7 @@ namespace ColorSpace {
 
 
 	struct Cie2000Comparison {
-		static double Compare(IColorSpace *a, IColorSpace *b);
+		static double Compare(IColorSpace *a, IColorSpace *b, double kL = 1.0);
 	};
 
 
