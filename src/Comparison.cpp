@@ -66,7 +66,7 @@ namespace ColorSpace {
 		return sqrt(SQR(deltaL) + SQR(deltaC) + deltaH/SQR(sh));
 	}
 
-	double Cie2000Comparison::Compare(IColorSpace *a, IColorSpace *b, double kL) {
+    double Cie2000Comparison::Compare(IColorSpace *a, IColorSpace *b, double kL, double kC, double kH) {
 		const double eps = 1e-5;
 		Lab lab_a;
 		Lab lab_b;
@@ -137,9 +137,13 @@ namespace ColorSpace {
 		double sc = 1 + 0.045*meanC;
 		double sh = 1 + 0.015*meanC*T;
 		double rc = 2 * sqrt(meanC7 / (meanC7 + 6103515625.));
-		double rt = -sin(DegToRad(60 * exp(-SQR((RadToDeg(meanH) - 275) / 25)))) * rc;
+        double rt = -sin(DegToRad(60 * exp(-SQR((RadToDeg(meanH) - 275) / 25)))) * rc ;
 
-		return sqrt(SQR(deltaL / (sl * kL)) + SQR(deltaC / sc) + SQR(deltaH / sh) + rt * deltaC / sc * deltaH / sh);
+        sl*=kL;
+        sc*=kC;
+        sh*=kH;
+
+        return sqrt(SQR(deltaL / sl ) + SQR(deltaC / sc) + SQR(deltaH / sh ) + rt * deltaC / sc * deltaH / sh);
 	}
 
 
