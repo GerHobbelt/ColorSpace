@@ -49,4 +49,4 @@ ColorSpace::Cie2000Comparison::Compare(&a, &b);
 
 ## License
 
-ColorSpace is licenced under the MIT License, see LICENSE for more information.
+ColorSpace is licensed under the MIT License, see LICENSE for more information.
